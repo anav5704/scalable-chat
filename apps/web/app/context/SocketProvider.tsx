@@ -8,7 +8,7 @@ interface SocketProviderProps {
 }
 
 interface ISocketContext {
-    sendMessage: (message: string, username: string) => void,
+    sendMessage: ({ message }: { message: string, username: string}) => void,
     messages: { message: string, username: string }[]
 }
 
@@ -24,15 +24,13 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
     const [socket, setSocket] = useState<Socket>()
     const [messages, setMessages] = useState<{ message: string, username: string }[]>([])
 
-    const sendMessage: ISocketContext["sendMessage"] = useCallback((message) => {
+    const sendMessage: ISocketContext["sendMessage"] = useCallback(({ message, username }: { message: string, username: string}) => {
         if(socket){
-            socket.emit("event:message", { message })
+            socket.emit("event:message", { message, username })
         }
     }, [socket])
 
-    const  onMessgeRecieved = useCallback((newMessage: { message: string, username: string}) => {
-        console.log(newMessage)
-        const { message, username } = newMessage
+    const  onMessgeRecieved = useCallback(({ message, username }: { message: string, username: string}) => {
         setMessages((prev) => [...prev, { message, username }])
         console.log(messages)
     }, [])
