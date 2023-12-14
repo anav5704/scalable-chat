@@ -20,12 +20,15 @@ export default function HomePage() {
                 <>
                     <div>
                         {messages.map((message, index) => (
-                            <p key={index}>{message}</p>
+                            <div key={index}>
+                            <p>{message.username}</p>
+                            <p>{message.message}</p>
+                            </div>
                         ))}
                     </div>
                     {username}
                     <input value={message} onChange={(e) => setMessage(e.target.value)} type="text" name="" id="" />
-                    <button onClick={() => sendMessage(message)}>Send</button>
+                    <button onClick={() => sendMessage(message, username)}>Send</button>
 
                 </>
             )}
