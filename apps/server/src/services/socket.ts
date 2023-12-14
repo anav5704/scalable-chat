@@ -35,16 +35,18 @@ export class SocketService {
         const io = this._io
         console.log("Initialsied web socket event listeners")
 
-        io.on("connect", (socket) => {
+        io.on("connect", (socket) => {  
             console.log("New web socket connectin established", socket.id)
-            socket.on("event:message", async ({ message }: { message: string }) => {
-                await pub.publish("MESSAGES", JSON.stringify({ message }))
+            socket.on("event:message", async ({ message, username }: { message: string, username: string }) => {
+                console.log(username, message)
+                await pub.publish("MESSAGES", JSON.stringify({ message, username }))
             })
         })
 
-        sub.on("message", async (channel, message) => {
+        sub.on("message", async (channel, msg) => {
             if(channel === "MESSAGES"){
-                io.emit("message", message)
+                const { message, username } = JSON.parse(msg)
+                io.emit("message", { message , username })
             }
         })
     }
