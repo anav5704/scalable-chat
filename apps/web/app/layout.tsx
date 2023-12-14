@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { SocketProvider } from "./context/socketProvider";
+import { Inter } from "next/font/google"
+import { SocketProvider } from "./context/SocketProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
