@@ -5,7 +5,12 @@ export class SocketService {
 
     constructor(){
         console.log("Web socket server started")
-        this._io = new Server()
+        this._io = new Server({
+            cors: {
+                allowedHeaders: ["*"],
+                origin: "*",
+            }
+        })
     }
 
     get io(){
@@ -18,11 +23,9 @@ export class SocketService {
 
         io.on("connect", (socket) => {
             console.log("New web socket connectin established", socket.id)
+            socket.on("event:message", async ({ message }: { message: string }) => {
+                console.log("New message recieved", message)
+            })
         })
-
-        io.on("event:message", async ({ message }: { message: string }) => {
-            console.log("New message recieved", message)
-        })
-
     }
 }
