@@ -1,11 +1,12 @@
 import { Server, Socket } from "socket.io"
 import Redis from "ioredis"
+import "dotenv/config"
 
 const redisConfig = {
     host: "scaleable-chat-scaleable-ws-chat.a.aivencloud.com",
-    port: 10193,
+    port: 10192,
     username: "default",
-    password: "AVNS_QpDd2Oz7DoL0xVY8O3m",
+    password: process.env.REDIS_PASSWD,
     maxRetriesPerRequest: 5,
 }
 
@@ -38,7 +39,6 @@ export class SocketService {
             console.log("New web socket connectin established", socket.id)
             socket.on("event:message", async ({ message }: { message: string }) => {
                 await pub.publish("MESSAGES", JSON.stringify({ message }))
-
             })
         })
 
