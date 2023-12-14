@@ -5,7 +5,8 @@ const redisConfig = {
     host: "scaleable-chat-scaleable-ws-chat.a.aivencloud.com",
     port: 10193,
     username: "default",
-    password: process.env.REDIS_PASSWD,
+    password: "AVNS_QpDd2Oz7DoL0xVY8O3m",
+    maxRetriesPerRequest: 5,
 }
 
 const pub = new Redis(redisConfig) // Publisher
@@ -43,7 +44,7 @@ export class SocketService {
 
         sub.on("message", async (channel, message) => {
             if(channel === "MESSAGES"){
-                io.emit("messages", message)
+                io.emit("message", message)
             }
         })
     }
