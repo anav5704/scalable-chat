@@ -1,50 +1,211 @@
-:root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
-
-  --callout-rgb: 20, 20, 20;
-  --callout-border-rgb: 108, 108, 108;
-  --card-rgb: 100, 100, 100;
-  --card-border-rgb: 200, 200, 200;
-
-  --glow-conic: conic-gradient(
-    from 180deg at 50% 50%,
-    #2a8af6 0deg,
-    #a853ba 180deg,
-    #e92a67 360deg
-  );
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    scroll-behavior: smooth;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+::-webkit-scrollbar {
+  display: none;
 }
+
+.box {
+    z-index: 50;
+    padding: 10px;
+    border-radius: 10px;
+    background: white;  
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 20vw;
+} 
+
+.box2 {
+    flex-direction: row;
+    background: transparent;
+    z-index: 50;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.box3 {
+    z-index: 50;
+    border-radius: 10px;
+    background: white;  
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 10px;
+}
+
+.msgbox {
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 50vh;
+    overflow-y: scroll;
+    bottom: 0;
+}
+
+.right {
+    margin-left: auto;
+    text-align: right;
+}
+
+.msg {
+     padding: 10px;
+    border-radius: 10px;
+    background-color: #eeeeee;
+    width: fit-content;
+    font-size: 13px;
+}
+
+.name {
+    font-size: 12px;
+    color: #5a5a5a;
+}
+
+button, input {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #eeeeee;
+    width: 100%;
+}
+
+input {
+    padding: 10px;
+}
+
+input:focus, button:focus {
+    outline: 2px solid #cccccc;
+}
+
+main { 
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-content: center;
+    position: relative;
+}
+
+.aurora {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: gird;
+    place-content: center;
+    overflow: hidden;
+}
+
+.canvas-wrapper {
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    opacity: 1;
+    position: relative;
+    overflow: hidden;
+    }
+    
+    .canvas-wrapper .aurora-wrapper {
+    width: 100%;
+    height: 100%;
+    background: rgba(194, 194, 194, 0.131);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+    
+    .canvas-wrapper .circle {
+    width: 150%;
+    aspect-ratio: 0.8;
+    margin: 0px auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    }
+    
+    .canvas-wrapper .circle.circle-0 {
+    background: radial-gradient(ellipse, #458fff, transparent, transparent);
+    animation: moveAround0 16s ease-in-out infinite;
+    }
+    
+    .canvas-wrapper .circle.circle-1 {
+    background: radial-gradient(ellipse, #f84bf4, transparent, transparent);
+    animation: moveAround1 16s ease-in-out infinite;
+    }
+    
+    .canvas-wrapper .circle.circle-2 {
+    background: radial-gradient(ellipse, #63d5c5, transparent, transparent);
+    animation: moveAround2 16s ease-in-out infinite;
+    }
+    
+    .canvas-wrapper .circle.circle-3 {
+    background: radial-gradient(ellipse, #b07ced, transparent, transparent);
+    animation: moveAround3 16s ease-in-out infinite;
+    }
+    
+    @keyframes moveAround0 {
+    0% {
+        transform: translate(-40%, -30%);
+    }
+    50% {
+        transform: translate(0%, 20%);
+    }
+    100% {
+        transform: translate(-40%, -30%);
+    }
+    }
+    
+    @keyframes moveAround1 {
+    0% {
+        transform: translate(-70%, -70%);
+    }
+    50% {
+        transform: translate(-40%, -40%);
+    }
+    100% {
+        transform: translate(-70%, -70%);
+    }
+    }
+    
+    @keyframes moveAround2 {
+    0% {
+        transform: translate(30%, -80%);
+    }
+    50% {
+        transform: translate(-30%, -50%);
+    }
+    100% {
+        transform: translate(30%, -80%);
+    }
+    }
+    
+    @keyframes moveAround3 {
+    0% {
+        transform: translate(-25%, 0%);
+    }
+    50% {
+        transform: translate(-76%, -45%);
+    }
+    100% {
+        transform: translate(-25%, 0%);
+    }
+    }
+    
+    
