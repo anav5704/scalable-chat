@@ -1,81 +1,25 @@
-# Turborepo starter
+# Scalable Web Socket Chat ⚡
 
-This is an official starter Turborepo.
+![hero](https://github.com/anav5704/scalable-chat/blob/main/scalable-chat.png)
 
-## Using this example
+This a real time chat app made to be both vertically and horizontally scalable. Scaling web sockets is hard but it is made easy through the use of a Redis server. In this app, users can only send and receive messages in a global chat room. Using Redis make this extremely fast and truly real time.
 
-Run the following command:
+## Technologies Used
+- Next JS
+- Node JS
+- Redis Server
+- Socket IO
+- Turbo Repo
 
-```sh
-npx create-turbo@latest
-```
+## Hosting
+There are 3 main parts to this project, the Next JS app, the Node JS server and the Redis server. The Next JS app is hosted on [Vercel](https://vercel.com/dashboard), the Node JS server is hosted on [Render](https://render.com/) and the Redis sever is fully managed by [Aiven](https://aiven.io/redis). All of these have free tiers so feel free to check them out.
 
-## What's inside?
+## Architecture
+This project incorporates both a client/server architecture and and a pub/sub architecture. The Node JS server, which uses web sockets to listen for users connecting to the server, subscribes them to the Redis server on load. When a user sends a message, the web sockets pick it up and publish it to the Redis server which broadcasts it to all connected clients(regardless of which Node JS server published it).
 
-This Turborepo includes the following packages/apps:
+## Getting Started
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+## Learning Resources
+- [Scalable Realtime Chat App](https://www.youtube.com/watch?v=CQQc8QyIGl0)
+- [WebSockets in 100 seconds](https://www.youtube.com/watch?v=1BfCnjr_Vjg)
+- [What are monorepos?](https://www.youtube.com/watch?v=9iU_IE6vnJ8)
