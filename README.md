@@ -1,6 +1,6 @@
 # Scalable Web Socket Chat ⚡
 
-![hero](https://github.com/anav5704/scalable-chat/blob/main/scalable-chat.png)
+![hero](https://github.com/anav5704/scalable-chat/blob/main/docs/scalable-chat.png)
 
 This a real time chat app made to be both vertically and horizontally scalable. Scaling web sockets is hard but it is made easy through the use of a Redis server. In this app, users can only send and receive messages in a global chat room. Using Redis make this extremely fast and truly real time.
 
