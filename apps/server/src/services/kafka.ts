@@ -1,6 +1,7 @@
 import { Kafka, KafkaJSDeleteGroupsError, Producer } from "kafkajs"
 import path from "path"
 import fs from "fs"
+import db from "./prisma"
 
 const kafka = new Kafka({
     brokers: ["kafka-scalable-ws-chat.a.aivencloud.com:10205"],
@@ -32,7 +33,7 @@ const produceMessage = async (message: string) => {
 
     await producer.send({
         messages: [{
-            key: `message-${Date.now()}`, value: message
+            key: `message-${Date.now()}`, value: message 
         }],
         topic: "MESSAGES"
     })
@@ -40,4 +41,35 @@ const produceMessage = async (message: string) => {
     return true
 }
 
-export { kafka, createProducer, produceMessage }
+const consumeMessage = async () => {
+    const consumer = kafka.consumer({ groupId: "default" })
+
+    await consumer.connect()
+    await consumer.subscribe({ topic: "MESSAGES", fromBeginning: true })
+
+    await consumer.run({
+        autoCommit: true,
+        eachMessage: async ({ message, pause }) => {
+            if(!message.value) return 
+
+            console.log("Kafka broker consumed message")
+            try {
+                await db.message.create({
+                    data: {
+                        content: message.value?.toString(), 
+                        username: ""
+                    }
+                })
+            } catch (error) {
+                console.log("Database write error")
+                pause()
+                setTimeout(() => {
+                        consumer.resume([{topic: "MESSAGES"}])
+                }, 60 * 1000)
+            }
+        }
+    })
+
+}
+
+export { kafka, createProducer, produceMessage, consumeMessage }
