@@ -1,6 +1,7 @@
 import { Server, Socket } from "socket.io"
 import Redis from "ioredis"
 import "dotenv/config"
+import db from "./prisma"
 
 const redisConfig = {
     host: "redis-scalable-ws-chat.a.aivencloud.com",
@@ -47,6 +48,12 @@ export class SocketService {
             if(channel === "MESSAGES"){
                 const { message, username } = JSON.parse(msg)
                 io.emit("message", { message , username })
+                await db.message.create({
+                    data: {
+                       content: message,
+                       username
+                    }
+                })
             }
         })
     }

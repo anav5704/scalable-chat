@@ -9,3 +9,12 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Message {
+    id String @id @default(uuid())
+    content String
+    username String
+    createdAt DateTime @default(now()) @map("created_at")
+
+    @@map("messages")
+}
