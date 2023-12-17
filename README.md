@@ -40,21 +40,11 @@ In this new version, the message is sent to the Kafka producer after it is emitt
 First fork and clone the repo. First run ```npm install``` to download all the dependencies. Now, set up your environmental variables. Make a ```.env``` file in ```apps/server``` with the following variable(this is from your Aiven Redis project):
 
 ```
-REDIS_PASSWD
+REDIS_PASSWD 
+KAFKA_PASSWD 
+DATABASE_URL 
 ```
-Also update the redis config in ```apps/server/src/services/socket.ts``` with the information provided by Aiven.
-
-```
-const redisConfig = {
-    host: "___",            
-    port:  "___",           
-    username: "___",            
-    password: process.env.REDIS_PASSWD,
-    maxRetriesPerRequest: 5,
-}
-```
-
-Once all of this is set up, cd back up  into the root of your project and run ```npm run dev``` so start up both the Next JS app and Node JS server.
+Also update the redis config in ```apps/server/src/services/socket.ts``` and the Kafka constructor in ```apps/server/src/services/kafka.ts``` with the information provided by Aiven. In addition to this, be sure to change the web socket url in the socketProvider with either ```localhost:8000``` or the hosted url of your server. Once all of this is set up, cd back up  into the root of your project and run ```npm run dev``` so start up both the Next JS app and Node JS server.
 
 ## Learning Resources
 - [Scalable Realtime Chat App](https://www.youtube.com/watch?v=CQQc8QyIGl0)
