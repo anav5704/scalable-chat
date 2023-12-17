@@ -3,7 +3,7 @@ import Redis from "ioredis"
 import "dotenv/config"
 
 const redisConfig = {
-    host: "scaleable-chat-scaleable-ws-chat.a.aivencloud.com",
+    host: "redis-scalable-ws-chat.a.aivencloud.com",
     port: 10192,
     username: "default",
     password: process.env.REDIS_PASSWD,

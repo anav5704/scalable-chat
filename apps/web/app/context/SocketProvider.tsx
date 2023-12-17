@@ -36,7 +36,7 @@ export const SocketProvider = ({ children }: SocketProviderProps) => {
     }, [])
 
     useEffect(() => {
-        const _socket = io("https://scaleable-chat.onrender.com")
+        const _socket = io("https://scalable-chat.onrender.com")
         _socket.on("message", onMessgeRecieved)
         setSocket(_socket)
 
