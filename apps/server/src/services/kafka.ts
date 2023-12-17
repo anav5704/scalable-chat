@@ -6,7 +6,7 @@ import db from "./prisma"
 const kafka = new Kafka({
     brokers: ["kafka-scalable-ws-chat.a.aivencloud.com:10205"],
     ssl: {
-        ca: [fs.readFileSync(path.resolve("./ca.pem"), "utf-8")]
+        ca: [fs.readFileSync(path.resolve("/etc/secrets/ca.pem"), "utf-8")]
     },
     sasl: {
         username: "avnadmin",
