@@ -1,4 +1,5 @@
 import { Server, Socket } from "socket.io"
+import { produceMessage } from "./kafka"
 import Redis from "ioredis"
 import "dotenv/config"
 import db from "./prisma"
@@ -48,12 +49,8 @@ export class SocketService {
             if(channel === "MESSAGES"){
                 const { message, username } = JSON.parse(msg)
                 io.emit("message", { message , username })
-                await db.message.create({
-                    data: {
-                       content: message,
-                       username
-                    }
-                })
+                await produceMessage(message)
+                console.log("Kafka broker produced message")
             }
         })
     }
