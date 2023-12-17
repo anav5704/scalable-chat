@@ -5,7 +5,8 @@
     "scripts": {
         "build": "tsc  -p .",
         "start": "node dist/index",
-        "dev": "npx tsc-watch --onSuccess \"node dist/index.js\""
+        "dev": "npx tsc-watch --onSuccess \"node dist/index.js\"",
+        "postinstall": "prisma generate"
     },
     "devDependencies": {
         "tsc-watch": "^6.0.4",
