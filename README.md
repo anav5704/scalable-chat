@@ -19,22 +19,10 @@ There are 5 main parts to this project, the Next JS app, the Node JS server, the
 
 ## Architecture
 
-<details>
-<summary>V1 - Volatile messages</summary>
-
-![architecture](https://github.com/anav5704/scalable-chat/blob/main/docs/architecture-v1.png)
+![architecture](https://github.com/anav5704/scalable-chat/blob/main/docs/architecture.png)
  
 This project incorporates both a client/server architecture and and a pub/sub architecture. The Node JS server, which uses web sockets to listen for users connecting to the server, subscribes them to the Redis server on load. When a user sends a message, the web sockets pick it up and publish it to the Redis server which broadcasts it to all connected clients(regardless of which Node JS server published it).
-</details>
-
-<details>
-<summary>V2 - Persistent messages</summary>
-
-![architecture](https://github.com/anav5704/scalable-chat/blob/main/docs/architecture-v2.png)
-
 In this new version, the message is sent to the Kafka producer after it is emitted by the web sockets. The producer then sends the message to a "MESSAGES" topic. The Kafka consumer subscribes to this topic when the server first starts and stores messages into a PostgreSQL database, one at a time. This consumer also has a 1 minute cool down if something goes wrong with the database. We are using kafka instead of directly writing to the database as it as a significantly higher throughput.
-
-</details>
 
 ## Getting Started
 First fork and clone the repo. First run ```npm install``` to download all the dependencies. Now, set up your environmental variables. Make a ```.env``` file in ```apps/server``` with the following variable(this is from your Aiven Redis project):
